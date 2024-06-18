@@ -51,4 +51,4 @@ You can find the Postman collection for making requests in ./collection
 
 
 ### Noted
-Due to the design of storage, please do not constantly send requests. Please delay the sending for 0.5 - 1 second before sending the next request.
+Due to the design of the storage, sending multiple requests at the same time can result in error. Delay the sending for 0.5 - 1 second before sending the next request is recommended.
