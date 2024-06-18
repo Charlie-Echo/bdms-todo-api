@@ -36,24 +36,28 @@ export class AppService {
       throw new HttpException('Invalid body form', HttpStatus.BAD_REQUEST);
     }
 
+    const isContainTitle = 'title' in body;
+    const isContainDescription = 'description' in body;
     switch (useCase) {
       case 'create':
-        if (!('title' in body)) throw new HttpException('The title key is required', HttpStatus.BAD_REQUEST);
+        if (!isContainTitle) throw new HttpException('The title field is required', HttpStatus.BAD_REQUEST);
         if (typeof body.title !== 'string') throw new HttpException('The title value is invalid', HttpStatus.BAD_REQUEST);
         if (body.title.length <= 0) throw new HttpException('The title value cannot be empty', HttpStatus.BAD_REQUEST);
 
-        if (!('description' in body)) throw new HttpException('The description key is required', HttpStatus.BAD_REQUEST);
+        if (!isContainDescription) throw new HttpException('The description field is required', HttpStatus.BAD_REQUEST);
         if (typeof body.description !== 'string') throw new HttpException('The description value is invalid', HttpStatus.BAD_REQUEST);
         if (body.description.length <= 0) throw new HttpException('The description value cannot be empty', HttpStatus.BAD_REQUEST);
 
         break
       case 'update':
-        if ('title' in body) {
+        if (!isContainTitle && !isContainDescription) throw new HttpException('The title or description field is required', HttpStatus.BAD_REQUEST);
+
+        if (isContainTitle) {
           if (typeof body.title !== 'string') throw new HttpException('The title value is invalid', HttpStatus.BAD_REQUEST);
           if (body.title.length <= 0) throw new HttpException('The title value cannot be empty', HttpStatus.BAD_REQUEST);
         }
 
-        if ('description' in body) {
+        if (isContainDescription) {
           if (typeof body.description !== 'string') throw new HttpException('The description value is invalid', HttpStatus.BAD_REQUEST);
           if (body.description.length <= 0) throw new HttpException('The description value cannot be empty', HttpStatus.BAD_REQUEST);
         };
