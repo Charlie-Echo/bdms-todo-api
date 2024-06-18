@@ -50,5 +50,5 @@ You can find the Postman collection for making requests in ./collection
 [DELETE] http://localhost:3000/{{todo_id}} => Delete a task by task's ID.
 
 
-### Noted
+### Note
 Due to the design of the storage, sending multiple requests at the same time can result in error. Delay the sending for 0.5 - 1 second before sending the next request is recommended.
